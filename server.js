@@ -21,7 +21,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
-  res.render('pages/index.ejs')
+  res.render('pages/searches/new.ejs')
 });
 
 // app.get('/Hello', showHome);
