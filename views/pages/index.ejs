@@ -1,44 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Forms</title>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="modules.css">
 </head>
-
 <body>
-  <h1> Hello world!</h1>
-<!-- http://localhost:3000/cookies -->
-  <!-- http://localhost:3000/cookies?name=stephen+king&flavor=yak+cheese&quantity=99 -->
-<!-- http://127.0.0.1:8080/?name=stephen+king&flavor=yak+cheese&quantity=3 -->
+  <h1>Books</h1>
 
+  <% for(let i = 0; i < titles.length; i++){ %>
+    <li>
+      <p><%= titles[i] %></p>
+      <!-- This is what you need for lab 12 -->
+      <form action="save-book" method="POST">
+        <input type="hidden" name="title" value="<%= titles[i] %>">
+        <input type="submit" value="save book">
+      </form>
+    </li>
+  <% } %>
 
-<!-- Forms talk to their own url, we can change it with the "action" -->
-<!-- if talking to YOUR server, you don't need the full url -->
-<!-- only need the route "/order" -->
-  <form action="/order">
-    <fieldset>
-      <legend> Books </legend>
-
-      <label for="title">
-        Title
-        <input type="text" name="name">
-      </label>
-
-      <label for="author">
-        Author
-        <input type="text" name="flavor">
-      </label>
-
-      <label for="quantity">
-        Quantity
-        <input type="number" name="quantity">
-      </label>
-
-      <input type="submit">
-    </fieldset>
-  </form>
+  <nav>
+    <a href="/book-search">book search</a>
+  </nav>
 </body>
-
 </html>
