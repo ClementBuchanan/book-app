@@ -12,16 +12,21 @@
 </head>
 <body>
   <h1>Books</h1>
+  <h2>
+    <p>There are <%= titles.length %> books in your library
+    </p>
+  </h2>
 
   <% for(let i = 0; i < titles.length; i++){ %>
-    <li>
-      <p><%= titles[i] %></p>
-      <!-- This is what you need for lab 12 -->
-      <form action="save-book" method="POST">
+    <div href="/pages/results.ejs">
+      <li>
+        <p><%= titles[i] %></p>
+        <form action="save-book" method="POST">
         <input type="hidden" name="title" value="<%= titles[i] %>">
-        <input type="submit" value="save book">
-      </form>
-    </li>
+        <input type="submit" value="View details">
+        </form>
+      </li>
+    </div>
   <% } %>
 
   <nav>
