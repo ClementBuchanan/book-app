@@ -18,10 +18,10 @@
   </h2>
   <fieldset>
     <legend>Book Search</legend>
-    <form action="/book-search" method="GET">
-    <input type="radio" id="author" name="author" value="author">
+    <form action="/book-search" method="POST">
+    <input type="radio" id="author" name="text" value="author">
     <label for="Author">Author</label>
-    <input type="radio" id="title" name="title" value="title">
+    <input type="radio" id="title" name="text" value="title">
     <label for="Title">Title</label>
     <input type="text" name="text">
     <input type="submit" value="search">

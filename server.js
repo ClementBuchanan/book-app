@@ -38,9 +38,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
-
-
-
 app.get('/todos', getTodos);
 app.get('/todo/:index', getTodos);
 app.post('/todo', createTodo);
