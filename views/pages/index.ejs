@@ -16,6 +16,18 @@
     <p>There are <%= titles.length %> books in your library
     </p>
   </h2>
+  <fieldset>
+    <legend>Book Search</legend>
+    <form action="/book-search" method="GET">
+    <input type="radio" id="author" name="author" value="author">
+    <label for="Author">Author</label>
+    <input type="radio" id="title" name="title" value="title">
+    <label for="Title">Title</label>
+    <input type="text" name="text">
+    <input type="submit" value="search">
+    </form>
+  </fieldset>
+    
 
   <% for(let i = 0; i < titles.length; i++){ %>
     <div href="/pages/results.ejs">

@@ -13,8 +13,7 @@
   <ul>
     <% for(let i = 0; i < titles.length; i++){ %>
       <li>
-        <p><%= titles[i] %></p>
-        <!-- This is what you need for lab 12 -->
+        <p><%= titles[i] %></p
         <form action="save-book" method="POST">
           <input type="hidden" name="title" value="<%= titles[i] %>">
           <input type="submit" value="save book">
