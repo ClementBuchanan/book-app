@@ -57,7 +57,7 @@ app.post('/save-book', saveBook);
 
 const todos = [
   { task: 'Make dinner for the kids', dueDte: 'yesterday' },
-  { task: 'feed the dogs', dueDate: 'Yesterdat' },
+  { task: 'feed the dogs', dueDate: 'Yesterday' },
   { task: 'wash the car', dueDate: 'Last week' },
   { task: 'Eat dinner', dueDate: 'Tomorrow' },
 ];
@@ -92,8 +92,6 @@ function createTodo(req, res) {
   res.redirect('/todos');
 }
 
-
-
 function saveBook(req, res) {
   console.log('body', req.body);
   const sqlQuery = 'INSERT INTO bookshelf(title) VALUES ($1) RETURNING ID';
@@ -116,8 +114,8 @@ function makeBookSearch(req, res) {
     console.log(results.body.items);
     const titles = results.body.items.map(items =>
       items.volumeInfo.title);
-    const author = results.body.author.map(items =>
-      items.volumeInfo.author);
+    // const author = results.body.author.map(items =>
+    //   items.volumeInfo.author);
     res.render('pages/searches/results.ejs', { titles: titles });
   });
 }
@@ -149,6 +147,6 @@ function Books(data) {
 // ====== start server =======
 client.connect()
   .then(() => {
-    app.listen(PORT, () => console.log(`SERVER on ${PORT}`))
+    app.listen(PORT, () => console.log(`SERVER on ${PORT}`));
   })
   .catch(error => console.log(error))
