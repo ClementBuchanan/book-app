@@ -13,9 +13,18 @@
 <body>
   <h1>Books</h1>
   <h2>
-    <p>There are <%= titles.length %> books in your library
-    </p>
+    <p>There are <%= titles.length %> books in your library</p>
   </h2>
+
+  <ul>
+    <% books.forEach(book => { %>
+    <li>
+      <h2><%= book.title%></h2>
+      <p><%= isbn %></p>
+      <p><%= Description %></p>
+    </li>
+  <% }) %>
+  </ul>
   <fieldset>
     <legend>Book Search</legend>
     <form action="/book-search" method="POST">
@@ -29,10 +38,12 @@
   </fieldset>
     
 
-  <% for(let i = 0; i < titles.length; i++){ %>
+
+  
+  <!-- <% for(let i = 0; i < titles.length; i++){ %>
     <div href="/pages/results.ejs">
       <li>
-        <p><%= titles[i] %></p>
+        <p><%= titles[i].title %></p>
         
       </li>
     </div>
@@ -40,6 +51,6 @@
 
   <nav>
     <a href="/book-search">book search</a>
-  </nav>
+  </nav> -->
 </body>
 </html>

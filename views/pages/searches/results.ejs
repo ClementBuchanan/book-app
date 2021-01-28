@@ -18,6 +18,7 @@
         <p><%= titles[i].isbn %></p>
         <p><%= titles[i].url %></p>
         <p><%= titles[i].description %></p
+        <img src="<%= titles[i].image_url %>" alt="">
         <form action="/save-book" method="POST">
           <input type="hidden" name="title" value="<%= JSON.stringify(titles[i]) %>">
           <input type="submit" value="save book">
