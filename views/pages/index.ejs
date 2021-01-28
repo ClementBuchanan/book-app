@@ -19,11 +19,11 @@
   <fieldset>
     <legend>Book Search</legend>
     <form action="/book-search" method="POST">
-    <input type="radio" id="author" name="text" value="author">
+    <input type="radio" id="author" name="searchType" value="author">
     <label for="Author">Author</label>
-    <input type="radio" id="title" name="text" value="title">
+    <input type="radio" id="title" name="searchType" value="title">
     <label for="Title">Title</label>
-    <input type="text" name="text">
+    <input type="text" name="searchTerm">
     <input type="submit" value="search">
     </form>
   </fieldset>
@@ -33,10 +33,7 @@
     <div href="/pages/results.ejs">
       <li>
         <p><%= titles[i] %></p>
-        <form action="save-book" method="POST">
-        <input type="hidden" name="title" value="<%= titles[i] %>">
-        <input type="submit" value="View details">
-        </form>
+        
       </li>
     </div>
   <% } %>

@@ -48,10 +48,6 @@ app.get('/book-search', showSearchPage);
 app.post('/book-search', makeBookSearch);
 app.post('/save-book', saveBook);
 
-// app.get('/', (req, res) => {
-//   res.render('pages/searches/search.ejs');
-// });
-
 const todos = [
   { task: 'Make dinner for the kids', dueDte: 'yesterday' },
   { task: 'feed the dogs', dueDate: 'Yesterday' },
@@ -91,28 +87,26 @@ function createTodo(req, res) {
 
 function saveBook(req, res) {
   console.log('body', req.body);
-  const sqlQuery = 'INSERT INTO bookshelf(title) VALUES ($1) RETURNING ID';
-  const array = [req.query.title];
-
-  client.query(sqlQuery.array)
+  const book = JSON.parse(req.body.title);
+  const sqlQuery = 'INSERT INTO books(author, title, isbn, image_url, description) VALUES ($1, $2, $3, $4, $5) RETURNING ID';
+  const array = [book.author, book.title, book.isbn, book.image_url, book.description];
+  console.log(book);
+  client.query(sqlQuery, array)
     .then(result => {
       console.log(result.rows[0].id);
-      const id = result.rows[0];
-      res.redirect(`/savedbook.${id}`);
+      const id = result.rows[0].id;
+      res.redirect(`/savedbook/${id}`);
     });
-  savedBookTitles.push(req.body.title);
-  res.redirect('/');
 }
 
 function makeBookSearch(req, res) {
-  const title = req.body.title;
-  const url = `https://www.googleapis.com/books/v1/volumes?q=+intitle:${title}`;
+  const searchType = req.body.searchType;
+  const searchTerm = req.body.searchTerm;
+  const url = `https://www.googleapis.com/books/v1/volumes?q=+in${searchType}:${searchTerm}`;
+  console.log(url);
   superagent.get(url).then(results => {
-    console.log(results.body.items);
-    const titles = results.body.items.map(items =>
-      items.volumeInfo.title);
-    // const author = results.body.author.map(items =>
-    //   items.volumeInfo.author);
+
+    const titles = results.body.items.map(item => new Book(item));
     res.render('pages/searches/results.ejs', { titles: titles });
   });
 }
@@ -122,24 +116,25 @@ function showSearchPage(req, res) {
 }
 
 function showBooks(req, res) {
-  const savedBookTitles = ['book1', 'book2', 'book3']
-  res.render('pages/index.ejs', { titles: savedBookTitles });
+  const sqlQuery = 'SELECT * FROM books';
+  client.query(sqlQuery).then(results => {
+    res.render('pages/index.ejs', { titles: results.rows});
+  });
 }
 
 // ======= constructors ==========
 
-function Books(data) {
+function Book(data) {
   this.title = data.volumeInfo.title ? data.volumeInfo.title : 'Unknown Title';
   this.author = data.volumeInfo.author ? data.volumeInfo.author : 'Unknown autor';
-  this.description = data.volumeInfo.description ? data.volumenfo.description : "Unknown description";
-  if (data.volumeInfo.image[4] === 's') {
+  this.description = data.volumeInfo.description ? data.volumeInfo.description : "Unknown description";
+  if (data.volumeInfo.image && data.volumeInfo.image[4] === 's') {
     const firstHalf = data.volumeInfo.image.slice(0, 3);
     const secondHalf = data.volumeInfo.image.slice(4);
     data.image = `${firstHalf}s${secondHalf}`;
   }
   this.image = data.volumeInfo.image ? data.volumeInfo.image : 'https://i.imgur.com/J5LVHEL.jpg';
 }
-
 
 // ====== start server =======
 client.connect()
