@@ -25,16 +25,16 @@
   </nav>
   <form action="/book-search" method="POST">
     <fieldset>
-      <legend>Search Books</legend>
-      <label for="title">Title</label>
-      <input type="radio" name="title">
-      <label for="author">Author</label>
-      <input type="radio" name="author">
-      <input type="text" name="text">
-
-      <input type="submit" value="search by title">
+      <legend>Book Search</legend>
+      <form action="/book-search" method="POST">
+      <input type="radio" id="author" name="searchType" value="author">
+      <label for="Author">Author</label>
+      <input type="radio" id="title" name="searchType" value="title">
+      <label for="Title">Title</label>
+      <input type="text" name="searchTerm">
+      <input type="submit" value="search">
+      </form>
     </fieldset>
-  </form>
 </body>
 
 </html>
