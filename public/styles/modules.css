@@ -1,0 +1,21 @@
+#results-title {
+  text-align: center;
+  color: black;
+}
+
+#results-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#results-p {
+  text-align: center;
+  color: black;
+}
+
+#results-div {
+  position: fixed;
+  width: 100%;
+  height: 30px;
+}
