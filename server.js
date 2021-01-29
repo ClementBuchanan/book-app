@@ -148,8 +148,9 @@ function makeBookSearch(req, res) {
   const url = `https://www.googleapis.com/books/v1/volumes?q=+in${searchType}:${searchTerm}`;
   console.log(url);
   superagent.get(url).then(results => {
+    console.log('!!!!!!!!!', results.body.items[0].volumeInfo.imageLinks.smallThumbnail);
     const titles = results.body.items.map(item => new Book(item));
-
+    console.log('+++++', titles);
     res.render('pages/searches/results.ejs', { titles: titles });
   });
 }
@@ -176,9 +177,12 @@ function Book(data) {
     const secondHalf = data.volumeInfo.image.slice(4);
     data.image = `${firstHalf}s${secondHalf}`;
   }
-  this.image = data.volumeInfo.image ? data.volumeInfo.image : 'https://i.imgur.com/J5LVHEL.jpg';
+  this.image = data.volumeInfo.imageLinks.smallThumbnail ? data.volumeInfo.imageLinks.smallThumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
 }
 
+  
+
+// this.image = data.volumeInfo.image ? data.volumeInfo.image : 'https://i.imgur.com/J5LVHEL.jpg';
 // ====== start server =======
 client.connect()
   .then(() => {
