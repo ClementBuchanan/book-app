@@ -4,27 +4,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Books</title>
-  <link rel="stylesheet" href="reset.css">
-  <link rel="stylesheet" href="base.css">
-  <link rel="stylesheet" href="layout.css">
-  <link rel="stylesheet" href="modules.css">
 
-<nav>
-  <ul>
-    <li>
-      <a href='/search.ejs'>Search for books</a>
-    </li>
-  </ul>
-</nav>
+<title>Books</title>
+<link rel="stylesheet" href="reset.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="layout.css">
+<link rel="stylesheet" href="modules.css">
+
 </head>
-<body>
-  <h1>Books Details</h1>
-  <nav>
-    <a href="/book-search">book search</a>
-  </nav>
-  <p <%= '/book-search' %></p>
-   
+
+<%- include('show.esj');
+
+<form action="/book/<%= book.isbn %>" mthod="POST">
+  <input type="text" value="<%= book.title %>" name="title">
+  <input type="text" value="<%= book.isbn %>" name="isbn">
+  <input type="text" value="<%= book.description %>" name="description">
+</form>
+
 </body>
 
 </html>
