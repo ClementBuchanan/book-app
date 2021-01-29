@@ -12,7 +12,7 @@ const app = express();
 const pg = require('pg');
 const client = new pg.Client(process.env.DATABASE_URL);
 const key = process.env.BOOKS_API_KEY;
-app.use(cors());
+
 
 
 
@@ -38,19 +38,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
-app.get('/todos', getTodos);
-app.get('/todo/:index', getTodos);
-app.post('/todo', createTodo);
-app.delete('/todo:index', deleteTodo);
-app.put('/todo:id', updateTodo);
+// app.get('/todos', getTodos);
+// app.get('/todo/:index', getTodos);
+// app.post('/todo', createTodo);
+// app.delete('/todo:index', deleteTodo);
+// app.put('/todo:id', updateTodo);
 app.get('/', showBooks);
+app.use(cors());
 
-app.get('/', renderBooks);
-app.get('/book/:isbn', renderDetails);
-app.get('/book:isbn', updateBook);
+// app.get('/', renderBooks);
+app.get('/books/:id', renderDetails);
+// app.get('/book:isbn', updateBook);
 app.get('/book-search', showSearchPage);
 app.post('/book-search', makeBookSearch);
 app.post('/save-book', saveBook);
+app.get('/savedbook/:id', renderDetails);
 
 const todos = [
   { task: 'Make dinner for the kids', dueDte: 'yesterday' },
@@ -69,11 +71,27 @@ const todos = [
 // ======= functions =============
 // get books from th db  send them to the front end with res.render. render index.ejs.
 
+
+function renderDetails(req, res) {
+  const id = req.params.id;
+  const sql = 'SELECT * FROM books WHERE id=$1';
+  const sqlArray = [id];
+
+  client.query(sql, sqlArray)
+    .then(result => {
+      const singleBook = result.rows[0];
+      res.render('pages/books/show.ejs', {book: singleBook});
+    });
+  // res.send('detail page');
+}
+
+
+
 function renderbooks(req, res) {
   client.query('SELECT * FROM books;')
     .then(result => {
       console.log(result.rows);
-      res.render('index.ejs', {books: result.rows});
+      res.render('index.ejs', { books: result.rows });
     });
 }
 
