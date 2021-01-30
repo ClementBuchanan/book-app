@@ -177,7 +177,7 @@ function Book(data) {
     const secondHalf = data.volumeInfo.image.slice(4);
     data.image = `${firstHalf}s${secondHalf}`;
   }
-  this.image = data.volumeInfo.imageLinks.smallThumbnail ? data.volumeInfo.imageLinks.smallThumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
+  this.image = data.volumeInfo.imageLinks ? data.volumeInfo.imageLinks.smallThumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
 }
 
   

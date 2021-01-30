@@ -10,17 +10,8 @@
 <link rel="stylesheet" href="base.css">
 <link rel="stylesheet" href="layout.css">
 <link rel="stylesheet" href="modules.css">
-
 </head>
-
-<%- include('show.esj');
-
-<form action="/book/<%= book.isbn %>" mthod="POST">
-  <input type="text" value="<%= book.title %>" name="title">
-  <input type="text" value="<%= book.isbn %>" name="isbn">
-  <input type="text" value="<%= book.description %>" name="description">
-</form>
-
+<%- include('show.esj')%>
 </body>
 
 </html>

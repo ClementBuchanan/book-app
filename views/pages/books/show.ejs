@@ -16,11 +16,35 @@
 </head>
 <body>
   <h1>Books Details</h1>
-  
 
   <h2><%= book.title %></h2>
   <p><%= book.isbn %></p>
   <p><%= book.description %></p>
+  
+  <button onclick="myFunction()">Click Here to Edit</button>
+
+  <div id="myDIV">
+    <form action="/book/<%= book.isbn %>" method="POST">
+      <label for="title">Title</label>
+      <input type="text" value="<%= book.title %>" name="title">
+      <label for="isbn">isbn</label>
+      <input type="text" value="<%= book.isbn %>" name="isbn">
+      <label for="description">Description</label>
+      <textarea label="Description" name="description"><%= book.description %></textarea>
+      <input type="submit" value="update & save">
+    </form>
+  </div>
+ 
+  <script>
+  function myFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+  </script>
 
 </body>
 
