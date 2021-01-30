@@ -1,21 +1,41 @@
-#results-title {
+.results-title {
   text-align: center;
   color: black;
 }
 
-#results-img {
+.results-img {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-#results-p {
+.results-p {
+  text-align: center;
+  color: black;
+  width: 300px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: scroll;
+}
+
+.results-div {
+  position: fixed;
+  width: 100%;
+  height: 30px;
+}
+
+.results-h2 {
   text-align: center;
   color: black;
 }
 
-#results-div {
-  position: fixed;
-  width: 100%;
-  height: 30px;
+.results-h3 {
+  text-align: center;
+  color: black;
+
+}
+
+.results-button {
+  text-align: center;
 }

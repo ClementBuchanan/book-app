@@ -170,7 +170,7 @@ function showBooks(req, res) {
 
 function Book(data) {
   this.title = data.volumeInfo.title ? data.volumeInfo.title : 'Unknown Title';
-  this.author = data.volumeInfo.author ? data.volumeInfo.author : 'Unknown autor';
+  this.author = data.volumeInfo.author ? data.volumeInfo.author : 'Unknown author';
   this.description = data.volumeInfo.description ? data.volumeInfo.description : "Unknown description";
   if (data.volumeInfo.image && data.volumeInfo.image[4] === 's') {
     const firstHalf = data.volumeInfo.image.slice(0, 3);
