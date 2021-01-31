@@ -1,44 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books</title>
-    <!-- <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="base.css">
-    <link rel="stylesheet" href="layout.css">
-    <link rel="stylesheet" href="modules.css"> -->
-</head>
 <body>
   <h1>Books</h1>
-  
+
   <fieldset>
     <legend>Book Search</legend>
     <form action="/book-search" method="POST">
-    <input type="radio" id="author" name="searchType" value="author" required>
-    <label for="Author">Author</label>
-    <input type="radio" id="title" name="searchType" value="title" required>
-    <label for="Title">Title</label>
-    <input type="text" name="searchTerm" required>
-    <input type="submit" value="search">
+      <input type="radio" id="author" name="searchType" value="author" required>
+      <label for="Author">Author</label>
+      <input type="radio" id="title" name="searchType" value="title" required>
+      <label for="Title">Title</label>
+      <input type="text" name="searchTerm" required>
+      <input type="submit" value="search">
     </form>
-    </fieldset>
-    <h2>
+  </fieldset>
+  <h2>
     <p>There are <%= titles.length %> books in your library</p>
-    </h2>
-  
-    <ul>
-      <% titles.forEach(book => { %>
+  </h2>
+
+  <ul>
+    <% titles.forEach(book=> { %>
       <li>
         <a href="/books/<%= book.id %>">
-        <h2><%= book.title %></h2>
-        <p><%= book['isbn'] %></p>
-        <p><%= book['description'] %></p>
-        <img src="<%= book.image %>">
+          <h2>
+            <%= book.title %>
+          </h2>
+          <p>
+            <%= book['isbn'] %>
+          </p>
+          <p>
+            <%= book['description'] %>
+          </p>
+          <img src="<%= book.image %>">
         </a>
       </li>
-    <% }) %>
-    </ul>
+      <% }) %>
+  </ul>
 </body>
+
 </html>
