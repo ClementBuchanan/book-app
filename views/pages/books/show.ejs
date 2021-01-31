@@ -15,13 +15,13 @@
   </nav>
 </head>
 <body>
-  <h1>Books Details</h1>
+  <h1>Book Details</h1>
 
   <h2><%= book.title %></h2>
   <p><%= book.isbn %></p>
   <p><%= book.description %></p>
   
-  <button onclick="myFunction()">Click Here to Edit</button>
+  <button onclick="myFunction()">Update book details</button>
 
   <div id="myDIV">
     <form action="/book/<%= book.isbn %>" method="POST">
